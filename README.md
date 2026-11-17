@@ -1,21 +1,21 @@
-﻿# Derivada e Newton
+﻿<sub>**Datas:** pasta 07/06/2023 · código 07/06/2023 (`DerivadaENewton.Rmd`)</sub>
 
-## Data de criação
+# Derivada numérica e método de Newton
 
-Datas inferidas dos metadados dos arquivos em `C:\R\Derivada e Newton` (Windows).
+Demonstração de **derivada via números complexos** e **Newton-Raphson** vetorizado com gráficos.
 
-| Referência | Data |
-|------------|------|
-| Pasta criada no disco | 7 de junho de 2023 |
-| Primeiro código ou notebook versionado | 7 de junho de 2023 (`DerivadaENewton.Rmd`) |
-| Repositório Git (commit inicial) | 16 de novembro de 2026 |
+## O que o código faz
 
-Projeto local em `C:\R\Derivada e Newton`.
+`DerivadaENewton.Rmd`:
 
-## Como usar
+- `calcD(f, x)` — derivada complex-step.
+- Iteração de Newton para raízes de funções escalar/vetor.
+- Exemplos plotados com `ggplot2`.
 
-Abra os arquivos `.R`, `.Rmd`, `.py` ou o `.Rproj` nesta pasta no RStudio ou no editor de sua preferência.
+## Dados
 
-## Dados grandes
+Somente funções matemáticas definidas nos chunks.
 
-Arquivos acima de 100 MB podem estar listados no `.gitignore`; obtenha-os localmente se o código referenciar esses caminhos.
+## Como rodar
+
+Knit `DerivadaENewton.Rmd`.
