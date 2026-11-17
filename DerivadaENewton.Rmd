@@ -1,0 +1,92 @@
+---
+title: "Sei La"
+author: "Daniel"
+date: "2023-06-07"
+output: html_document
+---
+```{r}
+calcD = function(f, x, h = 10^(-8)){
+  result = Im(f(complex(real = x, imaginary = h)))/h
+  return(result)
+}
+
+newton = function(x, f, error = 10^(-8), ...){
+  xk = x
+  xk_1 = xk+1
+  count = 1
+  while(abs(xk_1 - xk) > error || f(xk_1) > error){
+    xk_1 = xk - f(xk)/calcD(f, xk)
+    xk = xk_1
+    if(xk == Inf){
+      return(0)
+    }
+  }
+  return(xk_1)
+}
+newton = Vectorize(newton, "x")
+```
+
+
+```{r}
+f = function(x){
+  result = x + sqrt(x^2 + 1)
+  return(result)
+}
+
+est_par = function(f, p){
+  
+  aux_f = function(x){
+    return(f(x) - p)
+  }
+  
+  my_x = newton(1, aux_f)
+  result = my_x - sqrt(my_x^2 + 1)
+  return(result)
+}
+
+est_par(f, 2) + est_par(f, 3) + est_par(f, 6)
+```
+
+```{r}
+library(ggplot2)
+
+f = function(x){
+  result = 2*x^2 - x - 2
+  return(result)
+}
+f = f |> Vectorize("x")
+
+dados = data.frame(x = seq(-10, 10, by = 0.1))
+dados$y = dados$x |> f()
+dados$raiz = dados$x |> newton(f = f, error = 10^(-10), h = 10^(-10)) |> round(2) |> as.factor()
+
+ggplot(dados)+
+  geom_point(aes(x = x, y = y, color = raiz))+
+  geom_hline(yintercept = 0)+
+  theme_classic()
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
